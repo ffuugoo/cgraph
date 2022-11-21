@@ -14,6 +14,9 @@ pub fn create_input<T: Default>(_: &str) -> Input<T> {
 macro_rules! node {
     (| $($params:ident),* | $body:block) => {
         CachedComputation::new(move |($($params,)*)| $body, ($($params,)*))
+
+        // This works exactly the same, but without computation caching.
+        // Computation::new(move |($($params,)*)| $body, ($($params,)*))
     };
 }
 
