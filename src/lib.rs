@@ -13,7 +13,7 @@ pub fn create_input<T: Default>(_: &str) -> Input<T> {
 
 macro_rules! node {
     (| $($params:ident),* | $body:block) => {
-        CachedComputation::new(move |($($params),*,)| $body, ($($params),*,))
+        CachedComputation::new(move |($($params,)*)| $body, ($($params,)*))
     };
 }
 
