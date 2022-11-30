@@ -114,14 +114,7 @@ where
     type Output = Out;
 
     fn compute(&mut self) -> Self::Output {
-        match &self.cache {
-            Some(out) => out.clone(),
-            None => {
-                let out = self.computation.compute();
-                self.cache = Some(out.clone());
-                out
-            }
-        }
+        self.cache.get_or_insert_with(|| self.computation.compute()).clone()
     }
 
     fn subscribe_for_invalidation(&mut self, subscriber: InvalidateWeakRef) {
